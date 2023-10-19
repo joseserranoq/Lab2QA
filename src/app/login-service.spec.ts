@@ -3,6 +3,8 @@ import { SpyAccountRepository } from './spy-account-repository';
 import { LoginService } from './login-service';
 import { AccountRepository } from './account-repository';
 import { mock, when, instance, verify } from 'ts-mockito';
+import { StubAccountRepository } from './stub-account-repository';
+import { FakeAccountRepository } from './fake-account-repository';
 describe('Login Service', () => {
   var account: any;
   let email: any;
@@ -15,7 +17,7 @@ describe('Login Service', () => {
   beforeEach(() => {
     email = "luzclarams01@gmail.com";
     user = "LuzClara30";
-    password = "12345678";
+    password = "Mm12345678910";
     fullname = "Luz Clara Mora Salazar";
     rol = null;
     intentosFallidos = 0;
@@ -47,7 +49,31 @@ describe('Login Service', () => {
     when(MockedAccountRepository.remove(account)).thenReturn();
     expect(loginService.desconnect(user!)).toBe(true);
   });
-
+  //Prueba 3: Stub de prueba con connect en login service
+  // objetivo: Verificar que el método connect de la clase LoginService conecte al usuario
+  //al retornar true se verifica su correcto funcionamiento.
+  //Datos de prueba: user = "LuzClara30", password = "Mm12345678910"
+  //Resultado esperado: que la función connect devuelva true.
+  it('Stub with connect in login service', () => {
+    var stubAccountRepository = new StubAccountRepository();
+    var loginService = new LoginService(stubAccountRepository);
+    account.setUser(user);
+    account.setPassword(password);
+    stubAccountRepository.save(account);
+    expect(loginService.connect(user, password)).toBe(true);
+  });
+  //Prueba 4: Fake de prueba con isConnect en login service
+  // objetivo: Verificar que el método isConnect de la clase LoginService conecte al usuario
+  //al retornar true se verifica su correcto funcionamiento.
+  //Datos de prueba: email = "luzclarams01@gmail.com"
+  //Resultado esperado: que la función isConnect devuelva true.
+  it('Fake with isConnect in login service', () => {
+    var fakeAccountRepository = new FakeAccountRepository();
+    var loginService = new LoginService(fakeAccountRepository);
+    account.setEmail(email);
+    fakeAccountRepository.save(account);
+    expect(loginService.isConnect(email)).toBe(true);
+  });
   afterEach(() => {
     account = null;
     email = null;
