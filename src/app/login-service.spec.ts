@@ -27,7 +27,7 @@ describe('Login Service', () => {
   //Prueba 1: Doble de prueba Spy account-repository con el método isConnect en login service
   // objetivo: Verificar que se llame al método findAccount de la clase SpyAccountRepository
   // Datos de prueba: email = "luzclarams01@gmail.com"
-  //Resultado esperado: que la función wasSavwInovke devuelva true.
+  //Resultado esperado: que la función wasSaveInvoke devuelva true.
   it('Spyaccount-repository with isConnect in login service', () => {
     var spyAccountRepository = new SpyAccountRepository();
     account.setEmail(email);
@@ -63,7 +63,7 @@ describe('Login Service', () => {
     expect(loginService.connect(user, password)).toBe(true);
   });
   //Prueba 4: Fake de prueba con isConnect en login service
-  // objetivo: Verificar que el método isConnect de la clase LoginService conecte al usuario
+  // objetivo: Verificar que el método isConnect de la clase LoginService verifique que el usuario esta conectado
   //al retornar true se verifica su correcto funcionamiento.
   //Datos de prueba: email = "luzclarams01@gmail.com"
   //Resultado esperado: que la función isConnect devuelva true.
