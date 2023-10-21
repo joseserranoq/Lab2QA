@@ -10,18 +10,10 @@ describe('Login Service', () => {
   let email: any;
   let user: any;
   let password: any;
-  let fullname: any;
-  let rol: null;
-  let intentosFallidos: any;
-  let bloqueado: any;
   beforeEach(() => {
     email = "luzclarams01@gmail.com";
     user = "LuzClara30";
     password = "Mm12345678910";
-    fullname = "Luz Clara Mora Salazar";
-    rol = null;
-    intentosFallidos = 0;
-    bloqueado = false;
     account = new Account();
   });
   //Prueba 1: Doble de prueba Spy account-repository con el método isConnect en login service
@@ -44,10 +36,10 @@ describe('Login Service', () => {
     let MockedAccountRepository = mock<AccountRepository>();
     let accountRepository = instance(MockedAccountRepository);
     let loginService = new LoginService(accountRepository);
-    account.setUser(user!);
+    account.setUser(user);
     when(MockedAccountRepository.getListaConnects()).thenReturn([account]);
     when(MockedAccountRepository.remove(account)).thenReturn();
-    expect(loginService.desconnect(user!)).toBe(true);
+    expect(loginService.desconnect(user)).toBe(true);
   });
   //Prueba 3: Stub de prueba con connect en login service
   // objetivo: Verificar que el método connect de la clase LoginService conecte al usuario
@@ -79,9 +71,5 @@ describe('Login Service', () => {
     email = null;
     user = null;
     password = null;
-    fullname = null;
-    rol = null;
-    intentosFallidos = null;
-    bloqueado = null;
   });
 });
